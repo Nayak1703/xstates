@@ -11,9 +11,13 @@ const Location = () => {
   const [cityList, SetCityList] = useState([]);
 
   const fetchList = async (url, funcName) => {
-    const response = await fetch(url);
-    const data = await response.json();
-    funcName(data);
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      funcName(data);
+    } catch (error) {
+      console.log("Error while fetching", error);
+    }
   };
 
   const handleCountryChange = (e) => {
@@ -28,16 +32,17 @@ const Location = () => {
     SetCitySelected(e.target.value);
   };
 
-  useEffect(() => {
-    fetchList(
-      "https://crio-location-selector.onrender.com/countries",
-      SetCountryList
-    );
-  }, []);
+  useEffect(
+    () =>
+      fetchList(
+        "https://crio-location-selector.onrender.com/countries",
+        SetCountryList
+      ),
+    []
+  );
 
   useEffect(() => {
     if (countrySelected) {
-      console.log(countrySelected, "yash");
       fetchList(
         `https://crio-location-selector.onrender.com/country=${countrySelected}/states`,
         SetStateList
@@ -113,7 +118,7 @@ const Location = () => {
         <h2>
           You selected <span className="cityName">{citySelected}</span>,{" "}
           <span className="grayText">
-            {stateSelected} , {countrySelected}
+            {stateSelected}, {countrySelected}
           </span>
         </h2>
       )}
