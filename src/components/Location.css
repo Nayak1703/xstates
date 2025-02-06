@@ -1,0 +1,24 @@
+.parent {
+  text-align: center;
+}
+
+.dropDownParent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.dropDownParent select {
+  height: 45px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.cityName {
+  font-size: 2rem;
+}
+
+.grayText {
+  opacity: 0.4;
+}
